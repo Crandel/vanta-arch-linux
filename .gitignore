@@ -1,2 +1,6 @@
 out/*
 !out/.gitkeep
+/pkg
+/src
+/linux
+/vanta-*.pkg.tar.zst

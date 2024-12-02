@@ -2,24 +2,23 @@
 # Maintainer: vanta
 # Contributor: vanta
 pkgname=vanta
-pkgver=2.0.3
+pkgver=2.11.0
 pkgrel=1
 pkgdesc="Vanta security tool for Linux."
-arch=('i686' 'x86_64')
+arch=('x86_64')
 url="https://vanta.com"
-license=('')
-groups=('')
 backup=('etc/vanta.conf')
 options=('!strip' '!emptydirs')
-source_x86_64=("https://vanta-agent-repo.s3.amazonaws.com/targets/versions/${pkgver}/vanta-amd64.deb")
-sha512sums_x86_64=('83eb581067d0a7d2d34770e5c75c18a514140880168e9c7f83c5534c4c9a7a0823926ac963172f9ac79aafb24e121748144716be7e46de44c6805d21d4b6ab7c')
+source_x86_64=("https://app.vanta.com/osquery/download/linux")
+sha512sums_x86_64=('SKIP')
 
 package(){
-	mkdir data
+    if [ -d "data" ]; then rm -Rf ./data; fi
+	mkdir -p data
 	tar xzf data.tar.gz -C data
 	ls -l data/var/vanta
+	ls -l data/etc
 
-	install -Dm755 data/var/vanta/autoupdater "$pkgdir"/var/$pkgname/autoupdater
 	install -Dm644 data/var/vanta/cert.pem "$pkgdir"/var/$pkgname/cert.pem
 	install -Dm755 data/var/vanta/launcher "$pkgdir"/var/$pkgname/launcher
 	install -Dm755 data/var/vanta/metalauncher "$pkgdir"/var/$pkgname/metalauncher
